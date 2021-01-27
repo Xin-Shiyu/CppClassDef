@@ -7,7 +7,7 @@ namespace CppClassDef
     /// <summary>
     /// Represents a named scope
     /// </summary>
-    interface ICppScope
+    public interface ICppScope
     {
         ICppScope Outer { get; }
         string FullName { get; }

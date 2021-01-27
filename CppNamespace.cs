@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CppClassDef
 {
-    sealed class CppNamespace : ICppScope
+    public sealed class CppNamespace : ICppScope
     {
         public static readonly CppNamespace Global = new CppNamespace(null, "");
         public static readonly CppNamespace Std = new CppNamespace(Global, "std");

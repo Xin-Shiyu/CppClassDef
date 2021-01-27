@@ -5,20 +5,20 @@ using System.Text;
 
 namespace CppClassDef
 {
-    enum CppClassType
+    public enum CppClassType
     {
         Class,
         Struct
     }
 
-    enum CppMemberAccessibility
+    public enum CppMemberAccessibility
     {
         Public,
         Private,
         Protected
     }
 
-    class CppField
+    public class CppField
     {
         public CppMemberAccessibility Accessibility;
         public readonly bool IsStatic;
@@ -39,7 +39,7 @@ namespace CppClassDef
             : $"{Type.DeclareObjectByFullName(Name)};";
     }
 
-    abstract class CppMethod : CppFunction
+    public abstract class CppMethod : CppFunction
     {
         public CppMemberAccessibility Accessibility;
         public virtual bool IsStatic { get; }
@@ -50,7 +50,7 @@ namespace CppClassDef
         }
     }
 
-    class CppStaticMethod : CppMethod
+    public class CppStaticMethod : CppMethod
     {
         public CppStaticMethod(CppLocalClass owner, string name, IList<CppParameter> parameters, ICppType returnType, CppMemberAccessibility accessibility) : base(owner, name, parameters, returnType, accessibility)
         {
@@ -64,7 +64,7 @@ namespace CppClassDef
         public override bool IsStatic => true;
     }
 
-    class CppInstanceMethod : CppMethod
+    public class CppInstanceMethod : CppMethod
     {
         public virtual bool IsVirtual => false;
         public override bool IsStatic => false;
@@ -82,7 +82,7 @@ namespace CppClassDef
         }
     }
 
-    class CppConstructor : CppInstanceMethod
+    public class CppConstructor : CppInstanceMethod
     {
         public readonly IList<KeyValuePair<string, string>> Initializers = new List<KeyValuePair<string, string>>();
 
@@ -107,7 +107,7 @@ namespace CppClassDef
         }
     }
 
-    class CppVirtualMethod : CppInstanceMethod
+    public class CppVirtualMethod : CppInstanceMethod
     {
         public CppVirtualMethod(CppLocalClass scope, string name, IList<CppParameter> parameters, ICppType returnType, CppMemberAccessibility accessibility) : base(scope, name, parameters, returnType, accessibility)
         {
@@ -146,7 +146,7 @@ namespace CppClassDef
         }
     }
 
-    class CppOverridingMethod : CppVirtualMethod
+    public class CppOverridingMethod : CppVirtualMethod
     {
         public CppOverridingMethod(CppLocalClass scope, string name, IList<CppParameter> parameters, ICppType returnType, CppMemberAccessibility accessibility) : base(scope, name, parameters, returnType, accessibility)
         {
@@ -178,7 +178,7 @@ namespace CppClassDef
         }
     }
 
-    abstract class CppClass : CppScopedType, ICppScope
+    public abstract class CppClass : CppScopedType, ICppScope
     {
         public CppClass(ICppScope scope, string typename) : base(scope, typename)
         {
@@ -189,7 +189,7 @@ namespace CppClassDef
         public ICppScope Outer => Scope;
     }
 
-    class CppExternClass : CppClass
+    public class CppExternClass : CppClass
     {
         public CppExternClass(ICppScope scope, string typename) : base(scope, typename)
         {
@@ -198,7 +198,7 @@ namespace CppClassDef
         public override string DeclareType() => ClassType == CppClassType.Class ? $"class {Name};\n" : $"struct {Name};\n";
     }
 
-    class CppLocalClass : CppClass
+    public class CppLocalClass : CppClass
     {
         public readonly IList<CppField> Fields = new List<CppField>();
         public readonly IList<CppMethod> Methods = new List<CppMethod>();

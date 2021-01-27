@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CppClassDef
 {
-    static class Cpp
+    public static class Cpp
     {
         public static class Std
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CppClassDef
 {
-    class CppParameter
+    public class CppParameter
     {
         public readonly ICppType Type;
         public readonly string Name;
@@ -19,7 +19,7 @@ namespace CppClassDef
         public string DeclareParameter() => Type.DeclareObjectByFullName(Name);
     }
 
-    abstract class CppFunction
+    public abstract class CppFunction
     {
         public readonly ICppScope Scope;
         public readonly string Name;
@@ -44,7 +44,7 @@ namespace CppClassDef
 
         public virtual string DefineFunctionHead()
         {
-            return $"{ReturnType.DeclareObjectByFullName(FullName)}({Parameters.Select(parameter => parameter.DeclareParameter()).JoinWith(", ")})";
+            return $"{ReturnType.DeclareObjectByFullName(FullName.TrimStart(':'))}({Parameters.Select(parameter => parameter.DeclareParameter()).JoinWith(", ")})";
         }
 
         public virtual string DefineFunction()

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CppClassDef
 {
-    static class CppTypeExtensions
+    public static class CppTypeExtensions
     {
         public static CppPointer ToPointer(this ICppType type) => new CppPointer(type);
         public static CppReference ToReference(this ICppType type) => new CppReference(type);
@@ -28,7 +28,7 @@ namespace CppClassDef
         }
     }
 
-    interface ICppType
+    public interface ICppType
     {
         string FullName { get; }
         string Name { get; }
@@ -38,7 +38,7 @@ namespace CppClassDef
         string DeclareObject(string objectName);
     }
 
-    abstract class CppScopedType : ICppType
+    public abstract class CppScopedType : ICppType
     {
         public readonly ICppScope Scope;
 
@@ -60,7 +60,7 @@ namespace CppClassDef
         public abstract string DeclareType();
     }
 
-    class CppPrimitiveType : ICppType
+    public class CppPrimitiveType : ICppType
     {
         public CppPrimitiveType(string name)
         {
@@ -81,7 +81,7 @@ namespace CppClassDef
         public static CppPrimitiveType Char = new CppPrimitiveType("char");
     }
 
-    abstract class CppCompoundType : ICppType
+    public abstract class CppCompoundType : ICppType
     {
         public ICppType BaseType;
 
@@ -99,7 +99,7 @@ namespace CppClassDef
         public abstract string DeclareObjectByFullName(string objectName);
     }
 
-    class CppPointer : CppCompoundType
+    public class CppPointer : CppCompoundType
     {
         public CppPointer(ICppType baseType) : base(baseType)
         {
@@ -115,7 +115,7 @@ namespace CppClassDef
         public override bool IsCopyConstructible => true;
     }
 
-    class CppReference : CppCompoundType
+    public class CppReference : CppCompoundType
     {
         public CppReference(ICppType baseType) : base(baseType)
         {
@@ -144,7 +144,7 @@ namespace CppClassDef
         }
     }
 
-    class CppConst : CppCompoundType
+    public class CppConst : CppCompoundType
     {
         public CppConst(ICppType baseType) : base(baseType)
         {
@@ -158,7 +158,7 @@ namespace CppClassDef
         public override string DeclareObjectByFullName(string objectName) => BaseType.DeclareObjectByFullName($"const {objectName}");
     }
 
-    class CppArray : CppCompoundType
+    public class CppArray : CppCompoundType
     {
         public ulong Length;
 
@@ -175,7 +175,7 @@ namespace CppClassDef
         public override string DeclareObjectByFullName(string objectName) => BaseType.DeclareObjectByFullName($"{objectName}[{Length}]");
     }
 
-    class CppTypeDef : CppScopedType
+    public class CppTypeDef : CppScopedType
     {
         public ICppType OriginalType;
 

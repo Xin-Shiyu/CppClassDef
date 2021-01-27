@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace CppClassDef
 {
-    class CppTemplateParameter : ICppType
+    public class CppTemplateParameter : ICppType
     {
         public CppTemplateParameter(string name)
         {
@@ -22,7 +22,7 @@ namespace CppClassDef
         public string DeclareObjectByFullName(string objectName) => $"{FullName} {objectName}";
     }
 
-    class CppClassTemplate : CppLocalClass
+    public class CppClassTemplate : CppLocalClass
     {
         public readonly CppTemplateParameter TemplateParameter;
 

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace CppClassDef
 {
-    class CppModule
+    public class CppModule
     {
         public readonly string FileName;
         public readonly IList<CppScopedType> Types = new List<CppScopedType>();
